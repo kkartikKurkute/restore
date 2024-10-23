@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .prevent-select {
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
+    </style>
+    <script>
+function myFunction() {
+  var x = document.getElementById("demo");
+  x.style.WebkitUserSelect = "none"; // Safari
+  x.style.msUserSelect = "none"; // IE 10 and IE11
+  x.style.userSelect = "none"; // Standard syntax
+}
+    </script>
+</head>
+<body onload="myFunction()">
+   <div id="demo">
+       opsinha
+   </div>
+</body>
+</html>

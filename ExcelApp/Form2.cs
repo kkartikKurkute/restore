@@ -2104,7 +2104,6 @@ namespace ExcelApp
             btnCloseExcel_Click(sender, e);
             GlobalVar.frm3.Close(); 
             string sourcePath = @myExcelPath;
-
             string targetPath = @myExcelPath;
 
             string sourceFile  = System.IO.Path.Combine(targetPath, SingleFileName);

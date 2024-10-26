@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblMsg = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSaveNext = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnTryAgain = new System.Windows.Forms.Button();
             this.picBox = new System.Windows.Forms.PictureBox();
+            this.lblMsg = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
@@ -51,29 +51,19 @@
             this.panel1.Controls.Add(this.lblMsg);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(399, 220);
+            this.panel1.Size = new System.Drawing.Size(598, 338);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // lblMsg
-            // 
-            this.lblMsg.AutoSize = true;
-            this.lblMsg.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblMsg.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMsg.Location = new System.Drawing.Point(109, 105);
-            this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(197, 22);
-            this.lblMsg.TabIndex = 6;
-            this.lblMsg.Text = "The Image are same";
-            this.lblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(270, 131);
+            this.label3.Location = new System.Drawing.Point(405, 202);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 13);
+            this.label3.Size = new System.Drawing.Size(0, 20);
             this.label3.TabIndex = 11;
             this.label3.Visible = false;
             // 
@@ -85,10 +75,10 @@
             this.btnSaveNext.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnSaveNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveNext.Image = global::ExcelApp.Properties.Resources.SaveNext;
-            this.btnSaveNext.Location = new System.Drawing.Point(113, 155);
+            this.btnSaveNext.Location = new System.Drawing.Point(170, 238);
             this.btnSaveNext.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveNext.Name = "btnSaveNext";
-            this.btnSaveNext.Size = new System.Drawing.Size(119, 47);
+            this.btnSaveNext.Size = new System.Drawing.Size(178, 72);
             this.btnSaveNext.TabIndex = 10;
             this.btnSaveNext.UseVisualStyleBackColor = true;
             this.btnSaveNext.Click += new System.EventHandler(this.btnSaveNext_Click);
@@ -98,9 +88,10 @@
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::ExcelApp.Properties.Resources.RevealHint;
-            this.button2.Location = new System.Drawing.Point(250, 158);
+            this.button2.Location = new System.Drawing.Point(375, 243);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(116, 44);
+            this.button2.Size = new System.Drawing.Size(174, 68);
             this.button2.TabIndex = 9;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -113,31 +104,46 @@
             this.btnTryAgain.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnTryAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTryAgain.Image = global::ExcelApp.Properties.Resources.TryAgain;
-            this.btnTryAgain.Location = new System.Drawing.Point(10, 155);
+            this.btnTryAgain.Location = new System.Drawing.Point(15, 238);
             this.btnTryAgain.Margin = new System.Windows.Forms.Padding(0);
             this.btnTryAgain.Name = "btnTryAgain";
-            this.btnTryAgain.Size = new System.Drawing.Size(91, 47);
+            this.btnTryAgain.Size = new System.Drawing.Size(136, 72);
             this.btnTryAgain.TabIndex = 8;
             this.btnTryAgain.UseVisualStyleBackColor = true;
             this.btnTryAgain.Click += new System.EventHandler(this.btnTryAgain_Click_1);
             // 
             // picBox
             // 
-            this.picBox.Location = new System.Drawing.Point(171, 19);
+            this.picBox.Location = new System.Drawing.Point(256, 29);
+            this.picBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.picBox.Name = "picBox";
-            this.picBox.Size = new System.Drawing.Size(61, 57);
+            this.picBox.Size = new System.Drawing.Size(92, 88);
             this.picBox.TabIndex = 7;
             this.picBox.TabStop = false;
             // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblMsg.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMsg.Location = new System.Drawing.Point(164, 162);
+            this.lblMsg.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(292, 34);
+            this.lblMsg.TabIndex = 6;
+            this.lblMsg.Text = "The Image are same";
+            this.lblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MsgBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(399, 220);
+            this.ClientSize = new System.Drawing.Size(598, 338);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.HelpButton = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MsgBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MsgBox_Load);

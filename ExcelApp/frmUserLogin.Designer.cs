@@ -31,11 +31,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,19 +43,21 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 164);
+            this.label2.Location = new System.Drawing.Point(18, 252);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 19);
+            this.label2.Size = new System.Drawing.Size(110, 26);
             this.label2.TabIndex = 3;
             this.label2.Text = "Password";
             this.label2.Visible = false;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(103, 164);
+            this.txtPassword.Location = new System.Drawing.Point(154, 252);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(135, 20);
+            this.txtPassword.Size = new System.Drawing.Size(200, 26);
             this.txtPassword.TabIndex = 6;
             this.txtPassword.Visible = false;
             // 
@@ -69,18 +71,31 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(400, 157);
+            this.panel1.Size = new System.Drawing.Size(593, 249);
             this.panel1.TabIndex = 7;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(548, 28);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 40);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "X";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(113, 18);
+            this.label3.Location = new System.Drawing.Point(170, 28);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(196, 19);
+            this.label3.Size = new System.Drawing.Size(300, 26);
             this.label3.TabIndex = 14;
             this.label3.Text = "Enter Registered Email Id...";
             // 
@@ -88,9 +103,10 @@
             // 
             this.btnLogin.BackColor = System.Drawing.Color.Silver;
             this.btnLogin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(150, 110);
+            this.btnLogin.Location = new System.Drawing.Point(225, 169);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(90, 35);
+            this.btnLogin.Size = new System.Drawing.Size(135, 54);
             this.btnLogin.TabIndex = 13;
             this.btnLogin.Text = "Verify";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -98,41 +114,34 @@
             // 
             // txtLogin
             // 
-            this.txtLogin.Location = new System.Drawing.Point(87, 67);
+            this.txtLogin.Location = new System.Drawing.Point(130, 103);
+            this.txtLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(298, 20);
+            this.txtLogin.Size = new System.Drawing.Size(445, 26);
             this.txtLogin.TabIndex = 12;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(16, 66);
+            this.label1.Location = new System.Drawing.Point(24, 102);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 19);
+            this.label1.Size = new System.Drawing.Size(101, 26);
             this.label1.TabIndex = 11;
             this.label1.Text = "Email Id";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(365, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 26);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // frmUserLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(400, 157);
+            this.ClientSize = new System.Drawing.Size(593, 249);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmUserLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Verify Email...";

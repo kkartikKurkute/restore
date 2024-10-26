@@ -122,7 +122,7 @@ namespace ExcelApp
             System.Drawing.Rectangle screen = Screen.FromPoint(Cursor.Position).WorkingArea;
             int w = Width >= screen.Width ? screen.Width : (screen.Width + Width) / 2;
             int h = Height >= screen.Height ? screen.Height : (screen.Height + Height) / 2;
-            Location = new System.Drawing.Point(this.Width+150, screen.Top + (screen.Height - h) / 2);
+            Location = new System.Drawing.Point(this.Width + 150, screen.Top + (screen.Height - h) / 2);
             this.Height = screen.Height;
         }
         protected void ResetHeight()
@@ -181,8 +181,14 @@ namespace ExcelApp
             catch(Exception ex)
             {
                 MessageBox.Show("Please close excel sheet first!");
-            
-            }           
+            }
+            StartPosition = FormStartPosition.Manual;
+            System.Drawing.Rectangle screen = Screen.FromPoint(Cursor.Position).WorkingArea;
+            int w = Width >= screen.Width ? screen.Width : (screen.Width + Width) / 2;
+            int h = Height >= screen.Height ? screen.Height : (screen.Height + Height) / 2;
+            Location = new System.Drawing.Point(this.Width + (screen.Width - w) / 2, screen.Top + (screen.Height - h) / 2);
+            this.Height = screen.Height;
+            //kartik
         }
         private void RemoveReadOnlyAttribute(string filePath)
         {

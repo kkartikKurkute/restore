@@ -29,10 +29,11 @@ using System.Security.Cryptography;
 using Microsoft.Office.Core;
 using static Class1;
 using SixLabors.ImageSharp.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace ExcelApp
 {
-   
+
     public partial class Form2 : Form
     {
         TimeSpan DtStart;
@@ -52,11 +53,11 @@ namespace ExcelApp
         public static string strCell1;
         public static string strCell2;
         public string FilePath;
-      //  public static string strSheetName;
+        //  public static string strSheetName;
         public string strUserName;
         public string strEmailId;
         public string SingleFileName;
-        public  int intUserId;
+        public int intUserId;
         public int SingleUserId;
         string myExcelPath;
 
@@ -79,7 +80,7 @@ namespace ExcelApp
         public Form2()
         {
             InitializeComponent();
-            
+
         }
         public enum CompareResult
         {
@@ -141,23 +142,23 @@ namespace ExcelApp
                 process.Kill();
             }
         }
-    private void Form2_Load(object sender, EventArgs e)
+        private void Form2_Load(object sender, EventArgs e)
         {
             try
             {
                 KillMe();
-               // SetHeight();
+                // SetHeight();
                 if (getLoginId() == false)
                 {
                     System.Environment.Exit(0);
                 }
-         
+
                 string xx = GlobalVar.strSheetName;
                 int intQNos = intQNo;
-             //   button8.BackColor = Color.FromArgb(192, 192, 192);
+                //   button8.BackColor = Color.FromArgb(192, 192, 192);
 
                 string fullName = Assembly.GetEntryAssembly().Location;
-                myName =System.IO.Path.GetFileNameWithoutExtension(fullName);
+                myName = System.IO.Path.GetFileNameWithoutExtension(fullName);
                 myExcelPath = System.IO.Path.GetDirectoryName(fullName);
 
                 string myDirName = System.IO.Directory.GetCurrentDirectory();
@@ -172,23 +173,35 @@ namespace ExcelApp
                 xlApp.Visible = true;
                 getCaseStudy(Convert.ToInt32(myName));
 
-                if (frmUserLogin.strUserId !=null)
+                if (frmUserLogin.strUserId != null)
                 {
                     label6.Text = frmUserLogin.strUserId;
                     label7.Text = frmUserLogin.strUserName;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Please close excel sheet first!");
             }
-            StartPosition = FormStartPosition.Manual;
             System.Drawing.Rectangle screen = Screen.FromPoint(Cursor.Position).WorkingArea;
-            int w = Width >= screen.Width ? screen.Width : (screen.Width + Width) / 2;
-            int h = Height >= screen.Height ? screen.Height : (screen.Height + Height) / 2;
-            Location = new System.Drawing.Point(this.Width + (screen.Width - w) / 2, screen.Top + (screen.Height - h) / 2);
+
+            // Calculate the width of the sidebar (20% of the screen width)
+            int sidebarWidth = (int)(screen.Width * 0.2);
+
+            // Set the sidebar width to 20% of the screen
+            this.Width = sidebarWidth;
+
+            // Set the sidebar height to the full screen height
             this.Height = screen.Height;
+
+            // Position the sidebar on the right side of the screen
+            this.Location = new System.Drawing.Point(screen.Width - sidebarWidth, screen.Top);
+
+            // Optional: Set the StartPosition if you want to keep it consistent with your previous approach
+            this.StartPosition = FormStartPosition.Manual;
             //kartik
+
+
         }
         private void RemoveReadOnlyAttribute(string filePath)
         {
@@ -196,7 +209,7 @@ namespace ExcelApp
             {
                 System.IO.File.SetAttributes(filePath, attributes & ~FileAttributes.ReadOnly);
             }
-      
+
         }
         private void OpenExcel()
         {
@@ -204,7 +217,7 @@ namespace ExcelApp
             string myName = System.IO.Path.GetFileNameWithoutExtension(fullName);
             string myExcelPath = System.IO.Path.GetDirectoryName(fullName);
             fileExcel = myExcelPath + "\\Financial_Services_student_book.xlsx";
-      
+
             RemoveReadOnlyAttribute(fileExcel);
 
             Excel.Workbook xlWorkBook;
@@ -223,7 +236,7 @@ namespace ExcelApp
                 string fullName = Assembly.GetEntryAssembly().Location;
                 //string myName = "1";
 
-                strEmailId=GlobalVar.GEmailId;
+                strEmailId = GlobalVar.GEmailId;
                 //myName =System.IO.Path.GetFileNameWithoutExtension(fullName);
                 //intUserId = Convert.ToInt32(myName);
                 //SqlConnection conn = new SqlConnection(connectionString);
@@ -237,7 +250,7 @@ namespace ExcelApp
                 //    strEmailId = reader1.GetValue(5).ToString();
                 //    strUserName = reader1.GetValue(2).ToString();
 
-                   return true;
+                return true;
 
                 //}
                 //else
@@ -245,9 +258,9 @@ namespace ExcelApp
                 //    MessageBox.Show("Invalid User!");
                 //    return false;
                 //}
-              
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -290,15 +303,15 @@ namespace ExcelApp
             conn.ConnectionString = connectionString;
             strEmailId = GlobalVar.GEmailId;
 
-            SqlDataAdapter das = new SqlDataAdapter("select top 1* from intallium_sa.Login where EmailId='" + strEmailId + "' and CaseStudyId="+UserId+" order by sno desc", conn);
+            SqlDataAdapter das = new SqlDataAdapter("select top 1* from intallium_sa.Login where EmailId='" + strEmailId + "' and CaseStudyId=" + UserId + " order by sno desc", conn);
             DataSet dss = new DataSet();
             das.Fill(dss);
             if (dss.Tables[0].Rows.Count > 0)
             {
 
-              intCaseStudyId = Convert.ToInt32(dss.Tables[0].Rows[0]["CaseStudyId"].ToString()+"");
+                intCaseStudyId = Convert.ToInt32(dss.Tables[0].Rows[0]["CaseStudyId"].ToString() + "");
 
-                if(conn.State==ConnectionState.Open)
+                if (conn.State == ConnectionState.Open)
                 {
                     conn.Close();
                 }
@@ -309,7 +322,7 @@ namespace ExcelApp
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 string xName = "";
-                cmd.CommandText = "select top 1 SheetName,QNo,Question from QuestionDetail where FK_CaseStudyId="+intCaseStudyId+ " order by QNo";
+                cmd.CommandText = "select top 1 SheetName,QNo,Question from QuestionDetail where FK_CaseStudyId=" + intCaseStudyId + " order by QNo";
                 cmd.ExecuteNonQuery();
                 dt = new System.Data.DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -318,13 +331,13 @@ namespace ExcelApp
                 {
                     ddlTestSheet.Items.Add(dr["SheetName"].ToString());
                     // ddlTestSheet.Text = dr["SheetName"].ToString()+"";
-                    xName= dr["SheetName"].ToString() + "";
+                    xName = dr["SheetName"].ToString() + "";
 
-                    label1.Text = dr["Question"].ToString()+"";
-                    label2.Text = "Question" + " " + dr["QNo"].ToString()+"";
+                    label1.Text = dr["Question"].ToString() + "";
+                    label2.Text = "Question" + " " + dr["QNo"].ToString() + "";
                     GlobalVar.QNo = Convert.ToInt32(dr["QNo"].ToString());
                 }
-                if(xName.Length>0)
+                if (xName.Length > 0)
                 {
                     ddlTestSheet.Text = xName;
                 }
@@ -342,7 +355,7 @@ namespace ExcelApp
             else
             {
                 string str3 = "Select * from QuestionDetail where FK_CaseStudyId = " + intCaseStudyId + "";
-              
+
                 SqlDataAdapter sda = new SqlDataAdapter(str3, connectionString);
                 dt = new System.Data.DataTable();
                 sda.Fill(dt);
@@ -351,31 +364,31 @@ namespace ExcelApp
                     return;
                 }
 
-                    if (dt != null)
+                if (dt != null)
                 {
                     if (dt.Rows.Count > 0)
                     {
-                        if(currentRow> dt.Rows.Count)
+                        if (currentRow > dt.Rows.Count)
                         {
                             currentRow = 0;
                         }
                         if (currentRow < dt.Rows.Count)
                         {
-                            
-                             QNo = Convert.ToInt32(dt.Rows[currentRow]["QNo"].ToString());
+
+                            QNo = Convert.ToInt32(dt.Rows[currentRow]["QNo"].ToString());
                             GlobalVar.QNo = QNo;
                             var row = dt.Rows[currentRow];
-                            ddlTestSheet.Text =row["SheetName"].ToString(); 
+                            ddlTestSheet.Text = row["SheetName"].ToString();
 
                             label1.Text = row["Question"].ToString();
                             label2.Text = "Question" + " " + QNo;
-                             Excel._Worksheet xlWorksheet = (Excel.Worksheet)xlApp.ActiveSheet;
-                             Excel.Range xlRange = xlWorksheet.UsedRange;
-                             if (row["SheetIndex"]+"" != string.Empty)
-                             {
-                                    Worksheet sheet = (Worksheet)xlApp.Worksheets[Convert.ToInt32(row["SheetIndex"].ToString())];
-                                    sheet.Select(Type.Missing);
-                             }
+                            Excel._Worksheet xlWorksheet = (Excel.Worksheet)xlApp.ActiveSheet;
+                            Excel.Range xlRange = xlWorksheet.UsedRange;
+                            if (row["SheetIndex"] + "" != string.Empty)
+                            {
+                                Worksheet sheet = (Worksheet)xlApp.Worksheets[Convert.ToInt32(row["SheetIndex"].ToString())];
+                                sheet.Select(Type.Missing);
+                            }
                             else
                             {
                                 Worksheet sheet = (Worksheet)xlApp.Worksheets[1];
@@ -432,7 +445,7 @@ namespace ExcelApp
                             Excel._Worksheet xlWorksheet = (Excel.Worksheet)xlApp.ActiveSheet;
                             Excel.Range xlRange = xlWorksheet.UsedRange;
 
-                            if (row["SheetIndex"]+"" != string.Empty)
+                            if (row["SheetIndex"] + "" != string.Empty)
                             {
                                 Worksheet sheet = (Worksheet)xlApp.Worksheets[Convert.ToInt32(row["SheetIndex"].ToString())];
                                 sheet.Select(Type.Missing);
@@ -449,8 +462,44 @@ namespace ExcelApp
 
             }
         }
+        
+                public int CornerRadius { get; set; } = 30; // Corner radius
+
+        protected override void OnPaint(PaintEventArgs pevent)
+        {
+            Graphics g = pevent.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Create a rounded rectangle path
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, CornerRadius, CornerRadius, 180, 90);
+            path.AddArc(Width - CornerRadius, 0, CornerRadius, CornerRadius, 270, 90);
+            path.AddArc(Width - CornerRadius, Height - CornerRadius, CornerRadius, CornerRadius, 0, 90);
+            path.AddArc(0, Height - CornerRadius, CornerRadius, CornerRadius, 90, 90);
+            path.CloseFigure();
+
+            // Set the button's region
+            this.Region = new Region(path);
+
+            // Fill the button background
+            using (SolidBrush brush = new SolidBrush(BackColor))
+            {
+                g.FillPath(brush, path);
+            }
+
+            // Draw the button text
+            TextRenderer.DrawText(g, Text, Font, ClientRectangle, ForeColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            this.Invalidate(); // Redraw on resize
+        }
+    
 
         private void button1_Click(object sender, EventArgs e)
+
         { if (GlobalVar.intOpen == 1)
             {
                 conn.Open();
@@ -478,7 +527,9 @@ namespace ExcelApp
                 conn.Close();
                 GlobalVar.intOpen = GlobalVar.intOpen + 1;
             }
+
         }
+
         protected void CloseNext()
         {
             if (timer1.Enabled)
@@ -643,32 +694,87 @@ namespace ExcelApp
             }
         }
 
+        //public void loadFiles()
+        //{
+
+        //    string str3 = "Select * from QuestionDetail where SheetName = '" + ddlTestSheet.SelectedItem + "' and FK_CaseStudyId="+GlobalVar.CaseStudyId+"";
+        //    SqlDataAdapter sda = new SqlDataAdapter(str3, connectionString);
+        //    dt = new System.Data.DataTable();
+        //    sda.Fill(dt);
+        //    int v = dt.Rows.Count;
+        //    progressBar1.Minimum = 1;
+        //    progressBar1.Maximum = v;
+        //    progressBar1.Value =1;
+        //    progressBar1.Step = 1;
+        //}
+
+        //public void incrementPbar()
+        //{
+        //    progressBar1.PerformStep();
+        //}
+
+        //public void decrementPbar()
+        //{
+        //    if (progressBar1.Value > 1)
+        //    {
+        //        progressBar1.Value--;
+        //    }
+        //}
+
+        // Variable to store the total number of rows
+        private int totalRows = 0;
+
         public void loadFiles()
         {
-
-            string str3 = "Select * from QuestionDetail where SheetName = '" + ddlTestSheet.SelectedItem + "' and FK_CaseStudyId="+GlobalVar.CaseStudyId+"";
+            // SQL Query to get data
+            string str3 = "Select * from QuestionDetail where SheetName = '" + ddlTestSheet.SelectedItem + "' and FK_CaseStudyId=" + GlobalVar.CaseStudyId;
             SqlDataAdapter sda = new SqlDataAdapter(str3, connectionString);
             dt = new System.Data.DataTable();
             sda.Fill(dt);
-            int v = dt.Rows.Count;
+
+            // Get the total number of rows
+            totalRows = dt.Rows.Count;
+
+            // Set the progress bar's minimum and maximum values
             progressBar1.Minimum = 1;
-            progressBar1.Maximum = v;
-            progressBar1.Value =1;
+            progressBar1.Maximum = totalRows;
+            progressBar1.Value = 1;
+
+            // Initialize Step to increment progress bar by 1
             progressBar1.Step = 1;
+
+            // Initialize percentage label
+            label5.Text = "0%";
         }
 
         public void incrementPbar()
         {
+            // Increment the progress bar value by one step
             progressBar1.PerformStep();
+
+            // Calculate the current percentage
+            int currentPercentage = (int)((double)progressBar1.Value / totalRows * 100);
+
+            // Update the percentage label
+           label5.Text = $"{currentPercentage}%";
         }
 
         public void decrementPbar()
         {
+            progressBar1.PerformStep();
+            // Decrement progress bar value by one step, but not below 1
             if (progressBar1.Value > 1)
             {
                 progressBar1.Value--;
             }
+
+            // Calculate the current percentage
+            int currentPercentage = (int)((double)progressBar1.Value / totalRows * 100);
+
+            // Update the percentage label
+            label5.Text = $"{currentPercentage}%";
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -695,10 +801,12 @@ namespace ExcelApp
                 }
             }
 
+
             if (currentRow > 0)
             {
                 GetDataMinus(intCaseStudyId);
             }
+
         }
         static void DisplayListOfMacros(Workbook workbook)
         {
@@ -759,10 +867,26 @@ namespace ExcelApp
             
         }
 
+        //int sec = 0;
+        int min = 00;
+        int hour = 00;
         private void timer1_Tick(object sender, EventArgs e)
         {
-           a = val++;
+            a = val++;
             lblTimer.Text = a.ToString();
+            a++;
+            if (a == 60)
+            {
+                min++;
+                a = 00;
+            }
+            if (min == 60)
+            {
+                hour++;
+                min = 00;
+            }
+
+            lblTimer.Text = hour.ToString() + " : " + min.ToString() + " : " + a.ToString();
         }
         private void Grid1Entry(int Qno)
         {
@@ -2300,7 +2424,6 @@ namespace ExcelApp
                 conn.Close();
             }
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             btnCloseExcel_Click(sender, e);
@@ -2364,20 +2487,198 @@ namespace ExcelApp
 
         private void lblArrow_Click(object sender, EventArgs e)
         {
+            // Assume you have a button (lblArrow) and other controls on the form.
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int newXPosition;
+
             if (lblArrow.Text == ">")
             {
-                this.SetDesktopLocation(1300, 0);
+                // Move the form to the right side and hide all controls except the button
+                newXPosition = screenWidth-80 ;  // Move the form to the right
                 lblArrow.Text = "<";
 
+                // Hide all controls except the button (lblArrow in this case)
+                foreach (Control control in this.Controls)
+                {
+                    if (control != lblArrow)  // Exclude the button (lblArrow)
+                    {
+                        control.Visible = false;
+                    }
+                }
+                //lblArrow.Text = "<";
             }
-            else 
+
+            else
             {
-                this.SetDesktopLocation(1100, 0);
+                // Move the form to the left and show all controls
+                newXPosition = 1000;  // Move the form to the left (for example)
                 lblArrow.Text = ">";
 
+                // Show all controls
+                foreach (Control control in this.Controls)
+                {
+                    control.Visible = true;
+                }
+
             }
+        
+
+            this.SetDesktopLocation(newXPosition, 0);  // Move form to the new X position
+
+
 
 
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length > 0)
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+
+                //string ssql = "delete from UserAnswer  where UserId="+ GlobalVar.GlobalUserId + " and FK_CaseStudyId='"+ GlobalVar.CaseStudyId + "' and QNo="+GlobalVar.QNo+"";
+                //SqlCommand cmd = new SqlCommand(ssql, conn);
+                //cmd.ExecuteNonQuery();
+                //conn.Close();
+                //conn.Open();
+                //ssql = "Insert into UserAnswer(UserId,EmailId,SheetName,QNo,FK_CaseStudyId) values("+GlobalVar.GlobalUserId +",'"+strEmailId+"','"+ GlobalVar.strSheetName + "',"+QNo+","+ GlobalVar.CaseStudyId +")";
+                //cmd = new SqlCommand(ssql, conn);
+                //cmd.ExecuteNonQuery();
+                //conn.Close();
+                groupBox1.Visible = true;
+                Grid1Entry(QNo);
+                Grid2Entry(QNo);
+                Grid3Entry(QNo);
+                groupBox1.Visible = false;
+                SqlCommand cmd = new SqlCommand();
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                conn.Open();
+                string sql = "select * from QuestionDetail where  SheetName='" + GlobalVar.strSheetName + "' and FK_CaseStudyId=" + GlobalVar.CaseStudyId + "";
+                cmd = new SqlCommand(sql, conn);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        string x = dr["QNo"].ToString();
+                        if (x.Length > 0)
+                        {
+                            if (QNo == Convert.ToInt32(dr["QNo"].ToString()))
+                            {
+                                intQNo = QNo;
+                            }
+                        }
+                    }
+                }
+                conn.Close();
+            }
+
+        }
+
+        //private void pictureBox3_Click(object sender, EventArgs e)
+        //{
+        //    if (GlobalVar.intOpen == 1)
+        //    {
+        //        conn.Open();
+        //        string selectquery = "SELECT * FROM QuestionDetail where QNo = " + GlobalVar.QNo + " and FK_CaseStudyId=" + GlobalVar.CaseStudyId + "";
+        //        SqlCommand cmd = new SqlCommand(selectquery, conn);
+        //        SqlDataReader reader1;
+        //        reader1 = cmd.ExecuteReader();
+
+        //        if (reader1.Read())
+        //        {
+
+        //            //    Form3 frm3 = new Form3();
+
+        //            label3.Visible = false;
+        //            label3.Text = reader1.GetValue(6).ToString();
+        //            GlobalVar.QLink = reader1.GetValue(12).ToString();
+        //            GlobalVar.Qhint = reader1.GetValue(7).ToString();
+        //            GlobalVar.frm3 = new Form3();
+        //            GlobalVar.frm3.Show();//   frm3.Show();
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("NO DATA FOUND");
+        //        }
+        //        conn.Close();
+        //        GlobalVar.intOpen = GlobalVar.intOpen + 1;
+        //    }
+        //}
+
+        private void pictureBox3_Click_1(object sender, EventArgs e)
+        {
+            if (GlobalVar.intOpen == 1)
+            {
+                conn.Open();
+                string selectquery = "SELECT * FROM QuestionDetail where QNo = " + GlobalVar.QNo + " and FK_CaseStudyId=" + GlobalVar.CaseStudyId + "";
+                SqlCommand cmd = new SqlCommand(selectquery, conn);
+                SqlDataReader reader1;
+                reader1 = cmd.ExecuteReader();
+
+                if (reader1.Read())
+                {
+
+                    //    Form3 frm3 = new Form3();
+
+                    label3.Visible = false;
+                    label3.Text = reader1.GetValue(6).ToString();
+                    GlobalVar.QLink = reader1.GetValue(12).ToString();
+                    GlobalVar.Qhint = reader1.GetValue(7).ToString();
+                    GlobalVar.frm3 = new Form3();
+                    GlobalVar.frm3.Show();//   frm3.Show();
+                }
+                else
+                {
+                    MessageBox.Show("NO DATA FOUND");
+                }
+                conn.Close();
+                GlobalVar.intOpen = GlobalVar.intOpen + 1;
+            }
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTimer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        //private void timer2_Tick(object sender, EventArgs e)
+        //{
+
+
+
+        //        progressBar1.Increment(1);
+        //        label5.Text = progressBar1.Value.ToString() + "%";
+
+        //}
     }
 }

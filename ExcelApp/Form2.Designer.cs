@@ -66,16 +66,23 @@
             this.lblArrow = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -103,8 +110,10 @@
             // 
             // progressBar1
             // 
+            this.progressBar1.BackColor = System.Drawing.Color.LightCyan;
             resources.ApplyResources(this.progressBar1, "progressBar1");
             this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // label4
             // 
@@ -165,12 +174,14 @@
             // 
             resources.ApplyResources(this.lblTimer, "lblTimer");
             this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Click += new System.EventHandler(this.lblTimer_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dataGridView1, "dataGridView1");
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // dataGridView2
             // 
@@ -210,7 +221,7 @@
             // 
             // button8
             // 
-            this.button8.BackColor = System.Drawing.Color.Silver;
+            this.button8.BackColor = System.Drawing.Color.LightCyan;
             resources.ApplyResources(this.button8, "button8");
             this.button8.Name = "button8";
             this.button8.UseVisualStyleBackColor = false;
@@ -239,7 +250,7 @@
             // 
             // btnCheckAnswer
             // 
-            this.btnCheckAnswer.BackColor = System.Drawing.Color.Silver;
+            this.btnCheckAnswer.BackColor = System.Drawing.Color.LightCyan;
             resources.ApplyResources(this.btnCheckAnswer, "btnCheckAnswer");
             this.btnCheckAnswer.Name = "btnCheckAnswer";
             this.btnCheckAnswer.UseVisualStyleBackColor = false;
@@ -247,7 +258,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.BackColor = System.Drawing.Color.Silver;
+            this.btnClose.BackColor = System.Drawing.Color.LightCyan;
             resources.ApplyResources(this.btnClose, "btnClose");
             this.btnClose.Name = "btnClose";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -265,7 +276,6 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox1.Controls.Add(this.button10);
-            this.groupBox1.Controls.Add(this.pictureBox1);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
@@ -296,12 +306,13 @@
             // lblArrow
             // 
             resources.ApplyResources(this.lblArrow, "lblArrow");
+            this.lblArrow.BackColor = System.Drawing.Color.LightCyan;
             this.lblArrow.Name = "lblArrow";
             this.lblArrow.Click += new System.EventHandler(this.lblArrow_Click);
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Silver;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = false;
@@ -310,14 +321,49 @@
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.BackColor = System.Drawing.Color.White;
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Name = "label2";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::ExcelApp.Properties.Resources.SaveNext;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::ExcelApp.Properties.Resources.RevealHint;
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click_1);
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dataGridView4, "dataGridView4");
+            this.dataGridView4.Name = "dataGridView4";
             // 
             // Form2
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.dataGridView4);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lblArrow);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.groupBox1);
@@ -360,6 +406,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -403,5 +452,9 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Label lblArrow;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView dataGridView4;
     }
 }
